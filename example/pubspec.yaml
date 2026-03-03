@@ -1,0 +1,13 @@
+name: version_gate_example
+description: Example app demonstrating the version_gate package.
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  version_gate:
+    path: ../
