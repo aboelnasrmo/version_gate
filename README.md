@@ -90,7 +90,7 @@ Two popular packages exist for version checking — `new_version` (broken since 
 
 ```yaml
 dependencies:
-  version_gate: ^1.0.0
+  version_gate: ^1.0.2
 ```
 
 ### 2. Install packages
