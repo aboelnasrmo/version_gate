@@ -1,6 +1,6 @@
 name: version_gate
 description: Lightweight Flutter package that checks for app updates on App Store and Google Play with zero configuration, smart frequency guards, and customizable UI.
-version: 1.0.0
+version: 1.0.1
 homepage: https://aboelnasr.com
 repository: https://github.com/aboelnasrmo/version_gate
 issue_tracker: https://github.com/aboelnasrmo/version_gate/issues
