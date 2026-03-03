@@ -9,7 +9,7 @@ void main() {
     });
 
     test('allows check when no previous check exists', () async {
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       expect(await guard.shouldCheck(), isTrue);
     });
 
@@ -18,7 +18,7 @@ void main() {
         'version_gate_last_check': DateTime.now().toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       expect(await guard.shouldCheck(), isFalse);
     });
 
@@ -28,7 +28,7 @@ void main() {
         'version_gate_last_check': old.toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       expect(await guard.shouldCheck(), isTrue);
     });
 
@@ -38,7 +38,7 @@ void main() {
         'version_gate_last_check': recent.toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.oncePerWeek);
+      const guard = FrequencyGuard(frequency: CheckFrequency.oncePerWeek);
       expect(await guard.shouldCheck(), isFalse);
     });
 
@@ -48,7 +48,7 @@ void main() {
         'version_gate_last_check': old.toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.oncePerWeek);
+      const guard = FrequencyGuard(frequency: CheckFrequency.oncePerWeek);
       expect(await guard.shouldCheck(), isTrue);
     });
 
@@ -57,7 +57,7 @@ void main() {
         'version_gate_last_check': DateTime.now().toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.always);
+      const guard = FrequencyGuard(frequency: CheckFrequency.always);
       expect(await guard.shouldCheck(), isTrue);
     });
 
@@ -66,7 +66,7 @@ void main() {
         'version_gate_last_check': DateTime.now().toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.oncePerSession);
+      const guard = FrequencyGuard(frequency: CheckFrequency.oncePerSession);
       expect(await guard.shouldCheck(), isTrue);
     });
 
@@ -76,8 +76,8 @@ void main() {
         'version_gate_last_check': recent.toIso8601String(),
       });
 
-      final guard = FrequencyGuard(
-        frequency: const CheckFrequency.custom(hours: 12),
+      const guard = FrequencyGuard(
+        frequency: CheckFrequency.custom(hours: 12),
       );
       expect(await guard.shouldCheck(), isFalse);
     });
@@ -88,14 +88,14 @@ void main() {
         'version_gate_last_check': old.toIso8601String(),
       });
 
-      final guard = FrequencyGuard(
-        frequency: const CheckFrequency.custom(hours: 12),
+      const guard = FrequencyGuard(
+        frequency: CheckFrequency.custom(hours: 12),
       );
       expect(await guard.shouldCheck(), isTrue);
     });
 
     test('recordCheck saves current timestamp', () async {
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       await guard.recordCheck();
 
       final prefs = await SharedPreferences.getInstance();
@@ -112,7 +112,7 @@ void main() {
         'version_gate_last_check': DateTime.now().toIso8601String(),
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       await guard.reset();
 
       final prefs = await SharedPreferences.getInstance();
@@ -124,7 +124,7 @@ void main() {
         'version_gate_last_check': 'not-a-date',
       });
 
-      final guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
+      const guard = FrequencyGuard(frequency: CheckFrequency.onceDaily);
       expect(await guard.shouldCheck(), isTrue);
     });
   });
