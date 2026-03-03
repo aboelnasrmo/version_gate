@@ -1,7 +1,7 @@
 # version_gate
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/version_gate_demo.gif" alt="version_gate demo" width="300"/>
+  <img src="https://github.com/aboelnasrmo/version_gate/blob/main/screenshots/update_dialog.png?raw=true" alt="version_gate demo" width="300"/>
 </p>
 
 <p align="center">
@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://pub.dev/packages/version_gate"><img src="https://img.shields.io/pub/v/version_gate.svg" alt="pub package"></a>
-  <a href="https://github.com/aboelnasr/version_gate/actions"><img src="https://img.shields.io/github/actions/workflow/status/aboelnasr/version_gate/ci.yml?branch=main" alt="build status"></a>
+  <a href="https://github.com/aboelnasrmo/version_gate/actions"><img src="https://img.shields.io/github/actions/workflow/status/aboelnasrmo/version_gate/ci.yml?branch=main" alt="build status"></a>
   <a href="https://pub.dev/packages/version_gate/score"><img src="https://img.shields.io/pub/points/version_gate" alt="pub points"></a>
   <a href="https://pub.dev/packages/version_gate/score"><img src="https://img.shields.io/pub/popularity/version_gate" alt="popularity"></a>
   <a href="https://pub.dev/packages/version_gate/score"><img src="https://img.shields.io/pub/likes/version_gate" alt="likes"></a>
@@ -75,7 +75,7 @@ Two popular packages exist for version checking — `new_version` (broken since 
 ## Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/update_dialog.png" width="300" alt="Update Dialog"/>
+  <img src="https://github.com/aboelnasrmo/version_gate/blob/main/screenshots/update_dialog.png?raw=true" width="300" alt="Update Dialog"/>
 </p>
 
 <p align="center">
@@ -380,7 +380,7 @@ Please make sure to update tests as appropriate and run `dart pub publish --dry-
 
 ### Reporting Bugs
 
-Found a bug? [Open an issue](https://github.com/aboelnasr/version_gate/issues/new?template=bug_report.md) with:
+Found a bug? [Open an issue](https://github.com/aboelnasrmo/version_gate/issues/new?template=bug_report.md) with:
 - Flutter version (`flutter --version`)
 - Platform (iOS/Android)
 - Steps to reproduce
@@ -388,7 +388,7 @@ Found a bug? [Open an issue](https://github.com/aboelnasr/version_gate/issues/ne
 
 ### Feature Requests
 
-Have an idea? [Open a feature request](https://github.com/aboelnasr/version_gate/issues/new?template=feature_request.md).
+Have an idea? [Open a feature request](https://github.com/aboelnasrmo/version_gate/issues/new?template=feature_request.md).
 
 ---
 

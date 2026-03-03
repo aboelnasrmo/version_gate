@@ -47,4 +47,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `http` — store API calls
 - `url_launcher` — open store listing
 
-[1.0.0]: https://github.com/aboelnasr/version_gate/releases/tag/v1.0.0
+[1.0.0]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.0
