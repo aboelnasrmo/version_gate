@@ -16,10 +16,6 @@ topics:
 screenshots:
   - description: "Update dialog shown when a new version is available"
     path: screenshots/update_dialog.png
-  - description: "Forced update screen blocking the app"
-    path: screenshots/update_block_screen.png
-  - description: "Persistent update banner"
-    path: screenshots/update_banner.png
 
 funding:
   - https://buymeacoffee.com/aboelnasrmo

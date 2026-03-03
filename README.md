@@ -75,15 +75,11 @@ Two popular packages exist for version checking — `new_version` (broken since 
 ## Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/update_dialog.png" width="250" alt="Update Dialog"/>
-  &nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/update_block_screen.png" width="250" alt="Forced Update Screen"/>
-  &nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/update_banner.png" width="250" alt="Update Banner"/>
+  <img src="https://raw.githubusercontent.com/aboelnasr/version_gate/main/screenshots/update_dialog.png" width="300" alt="Update Dialog"/>
 </p>
 
 <p align="center">
-  <em>Left: Optional dialog &nbsp;|&nbsp; Center: Forced update screen &nbsp;|&nbsp; Right: Persistent banner</em>
+  <em>Update dialog with version info, release notes, and action buttons</em>
 </p>
 
 ---
