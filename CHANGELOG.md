@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-04
+
+### Added
+- **Custom HTTP headers** — pass `headers` to `VersionGate()` for apps behind corporate proxies or CDNs that require auth headers on outbound requests
+- **Minimum version enforcement** — set `minimumVersion: '2.0.0'` to automatically force updates for critically outdated versions while keeping optional mode for newer ones
+- **Callbacks** — `onUpdateAvailable`, `onNoUpdate`, and `onError` callbacks for analytics tracking without manually inspecting the result
+- **Localization** — new `UpdateStrings` class with factory constructors for 10 languages: English, Arabic, Spanish, French, German, Turkish, Urdu, Chinese, Japanese, Korean. Pass `strings: UpdateStrings.arabic()` to show all built-in widgets in the target language
+- `UpdateStrings` supports custom text and `{storeVersion}` / `{localVersion}` placeholders
+
+### Changed
+- Built-in widgets (`UpdateDialog`, `UpdateBanner`, `UpdateBlockScreen`) now resolve text from `UpdateStrings` when available, falling back to English defaults
+- `VersionCheckResult` now carries an optional `strings` field for localization
+
 ## [1.0.5] - 2026-03-04
 
 ### Added
@@ -76,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `http` — store API calls
 - `url_launcher` — open store listing
 
+[1.1.0]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.1.0
 [1.0.5]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.5
 [1.0.4]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.4
 [1.0.3]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.3

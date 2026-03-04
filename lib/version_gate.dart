@@ -20,6 +20,7 @@ export 'src/checkers/android_store_checker.dart';
 export 'src/models/version_check_result.dart';
 export 'src/models/check_frequency.dart';
 export 'src/models/update_mode.dart';
+export 'src/models/update_strings.dart';
 export 'src/widgets/update_dialog.dart';
 export 'src/widgets/update_banner.dart';
 export 'src/widgets/update_block_screen.dart';

@@ -34,6 +34,10 @@
   - [Pattern D: Banner](#pattern-d-banner)
   - [Pattern E: Weekly Check](#pattern-e-weekly-check)
   - [Pattern F: Override Package ID](#pattern-f-override-package-id)
+  - [Pattern G: Minimum Version](#pattern-g-minimum-version)
+  - [Pattern H: Custom Headers](#pattern-h-custom-headers)
+  - [Pattern I: Callbacks](#pattern-i-callbacks)
+  - [Pattern J: Localization](#pattern-j-localization)
 - [Configuration](#configuration)
   - [Check Frequencies](#check-frequencies)
   - [Update Modes](#update-modes)
@@ -64,7 +68,11 @@ Two popular packages exist for version checking — `new_version` (broken since 
 - **Zero configuration** — no API keys, no manual bundle IDs
 - **Smart frequency guard** — checks once daily (configurable)
 - **Three update modes** — optional, flexible, forced
+- **Minimum version enforcement** — auto-force updates below a threshold
 - **Built-in widgets** — dialog, banner, full-screen blocker
+- **Localization** — 10 languages out of the box (Arabic, Spanish, French, German, Turkish, Urdu, Chinese, Japanese, Korean)
+- **Custom HTTP headers** — works behind corporate proxies and CDNs
+- **Callbacks** — `onUpdateAvailable`, `onNoUpdate`, `onError` for analytics
 - **Custom UI friendly** — get the data, build your own UI
 - **Release notes** — shows "What's new" from the store
 - **Fail-safe** — never crashes your app, even on network errors
@@ -90,7 +98,7 @@ Two popular packages exist for version checking — `new_version` (broken since 
 
 ```yaml
 dependencies:
-  version_gate: ^1.0.5
+  version_gate: ^1.1.0
 ```
 
 ### 2. Install packages
@@ -249,6 +257,79 @@ final result = await VersionGate(
 ).check();
 ```
 
+### Pattern G: Minimum Version
+
+Force updates for critically outdated versions while keeping optional mode for everyone else.
+
+```dart
+final result = await VersionGate(
+  updateMode: UpdateMode.optional,
+  minimumVersion: '2.0.0', // anything below 2.0.0 becomes forced
+).check();
+
+if (result != null && result.hasUpdate) {
+  result.showBuiltInDialog(context);
+  // Users below 2.0.0 get a full-screen blocker
+  // Users above 2.0.0 get a dismissible dialog
+}
+```
+
+### Pattern H: Custom Headers
+
+For apps behind corporate proxies or CDNs that require auth headers.
+
+```dart
+final result = await VersionGate(
+  headers: {
+    'Authorization': 'Bearer your-token',
+    'X-Custom-Header': 'value',
+  },
+).check();
+```
+
+### Pattern I: Callbacks
+
+Hook into the check lifecycle for analytics tracking.
+
+```dart
+final result = await VersionGate(
+  onUpdateAvailable: (result) {
+    analytics.track('update_available', {
+      'store_version': result.storeVersion,
+      'local_version': result.localVersion,
+    });
+  },
+  onNoUpdate: (result) {
+    analytics.track('app_up_to_date');
+  },
+  onError: (error, result) {
+    crashlytics.recordError(error);
+  },
+).check();
+```
+
+### Pattern J: Localization
+
+Show built-in widgets in a different language.
+
+```dart
+// Use a built-in language
+final result = await VersionGate(
+  strings: UpdateStrings.arabic(),
+).check();
+
+// Or customize individual strings
+final result = await VersionGate(
+  strings: UpdateStrings(
+    title: 'Nueva versión',
+    updateButtonText: 'Actualizar',
+    laterButtonText: 'Después',
+  ),
+).check();
+```
+
+**Available languages:** English (default), Arabic, Spanish, French, German, Turkish, Urdu, Chinese (Simplified), Japanese, Korean.
+
 ---
 
 ## Configuration
@@ -259,8 +340,14 @@ All parameters are **optional**:
 VersionGate(
   checkFrequency: CheckFrequency.onceDaily,    // How often to check
   updateMode: UpdateMode.optional,              // Dialog behavior
-  packageIdOverride: 'com.production.appid',    // Override bundle ID
-  countryCode: 'us',                            // iTunes region
+  minimumVersion: '2.0.0',                     // Force below this version
+  headers: {'Authorization': 'Bearer token'},  // Custom HTTP headers
+  strings: UpdateStrings.arabic(),             // Localized widget text
+  onUpdateAvailable: (result) { ... },         // Update found callback
+  onNoUpdate: (result) { ... },                // Up to date callback
+  onError: (error, result) { ... },            // Error callback
+  packageIdOverride: 'com.production.appid',   // Override bundle ID
+  countryCode: 'us',                           // iTunes region
 )
 ```
 
@@ -312,9 +399,10 @@ final result = await gate.check(); // Returns VersionCheckResult?
 | `storeVersion` | `String` | Store version (e.g., `"1.5.0"`) |
 | `releaseNotes` | `String?` | "What's new" from the store |
 | `storeUrl` | `String` | Direct link to store listing |
-| `updateMode` | `UpdateMode` | The mode set in `VersionGate()` |
+| `updateMode` | `UpdateMode` | The mode set in `VersionGate()` (may be overridden to `forced` by `minimumVersion`) |
 | `lastChecked` | `DateTime` | Timestamp of this check |
 | `error` | `String?` | Error message if check failed |
+| `strings` | `UpdateStrings?` | Localized text for built-in widgets |
 
 | Method | Description |
 |:-------|:------------|
@@ -368,6 +456,10 @@ Compare versions (semantic versioning)
 | Once-daily check | ✅ | ✅ | ✅ |
 | Custom check frequency | ✅ | ❌ | ❌ |
 | Forced update mode | ✅ | ✅ | ❌ |
+| Minimum version enforcement | ✅ | ❌ | ❌ |
+| Localization (10 languages) | ✅ | ❌ | ❌ |
+| Custom HTTP headers | ✅ | ❌ | ❌ |
+| Analytics callbacks | ✅ | ❌ | ❌ |
 | Custom UI (bring your own) | ✅ Easy | ❌ Hard | ❌ |
 | Built-in dismissible dialog | ✅ | ✅ | ❌ |
 | Release notes from store | ✅ | ✅ | ❌ |

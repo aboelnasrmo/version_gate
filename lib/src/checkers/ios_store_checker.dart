@@ -9,7 +9,11 @@ import 'package:http/http.dart' as http;
 class IosStoreChecker {
   final http.Client _client;
 
-  IosStoreChecker({http.Client? client}) : _client = client ?? http.Client();
+  /// Optional custom HTTP headers for the store request.
+  final Map<String, String>? headers;
+
+  IosStoreChecker({http.Client? client, this.headers})
+      : _client = client ?? http.Client();
 
   /// Looks up the app by [bundleId] in the iTunes store for the given
   /// [countryCode] (defaults to "us").
@@ -24,7 +28,9 @@ class IosStoreChecker {
       final url = Uri.parse(
         'https://itunes.apple.com/lookup?bundleId=$bundleId&country=$countryCode',
       );
-      final response = await _client.get(url).timeout(
+      final response = await _client
+          .get(url, headers: headers)
+          .timeout(
         const Duration(seconds: 10),
       );
 

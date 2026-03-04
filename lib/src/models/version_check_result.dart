@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'update_mode.dart';
+import 'update_strings.dart';
 import '../widgets/update_dialog.dart';
 import '../widgets/update_block_screen.dart';
 
@@ -34,6 +35,11 @@ class VersionCheckResult {
   /// Error message if the check failed. `null` on success.
   final String? error;
 
+  /// Localized strings for the built-in widgets.
+  ///
+  /// When `null`, widgets fall back to their English defaults.
+  final UpdateStrings? strings;
+
   const VersionCheckResult({
     required this.hasUpdate,
     required this.localVersion,
@@ -43,12 +49,14 @@ class VersionCheckResult {
     required this.updateMode,
     required this.lastChecked,
     this.error,
+    this.strings,
   });
 
   /// Creates a "no update" result, typically used when the check fails.
   factory VersionCheckResult.noUpdate({
     required String localVersion,
     required UpdateMode updateMode,
+    UpdateStrings? strings,
     String? error,
   }) {
     return VersionCheckResult(
@@ -59,6 +67,7 @@ class VersionCheckResult {
       updateMode: updateMode,
       lastChecked: DateTime.now(),
       error: error,
+      strings: strings,
     );
   }
 
@@ -67,6 +76,9 @@ class VersionCheckResult {
   /// For [UpdateMode.forced], the dialog is not dismissible and the
   /// "Later" button is hidden. For [UpdateMode.optional], both buttons
   /// are shown.
+  ///
+  /// Text defaults are pulled from [strings] when available. Any
+  /// explicit parameter overrides the localized string.
   ///
   /// ```dart
   /// result.showBuiltInDialog(
@@ -89,7 +101,12 @@ class VersionCheckResult {
     if (updateMode == UpdateMode.forced) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (_) => UpdateBlockScreen(result: this),
+          builder: (_) => UpdateBlockScreen(
+            result: this,
+            title: title,
+            message: message,
+            buttonText: updateButtonText,
+          ),
         ),
         (_) => false,
       );

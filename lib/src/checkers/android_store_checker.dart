@@ -11,7 +11,10 @@ import 'ios_store_checker.dart' show StoreInfo;
 class AndroidStoreChecker {
   final http.Client _client;
 
-  AndroidStoreChecker({http.Client? client})
+  /// Optional custom HTTP headers for the store request.
+  final Map<String, String>? headers;
+
+  AndroidStoreChecker({http.Client? client, this.headers})
       : _client = client ?? http.Client();
 
   /// Looks up the app by [packageName] on the Google Play Store.
@@ -23,9 +26,16 @@ class AndroidStoreChecker {
       final url = Uri.parse(
         'https://play.google.com/store/apps/details?id=$packageName&hl=en',
       );
+
+      // Merge custom headers with the required User-Agent
+      final mergedHeaders = <String, String>{
+        'User-Agent': 'Mozilla/5.0',
+        ...?headers,
+      };
+
       final response = await _client.get(
         url,
-        headers: {'User-Agent': 'Mozilla/5.0'},
+        headers: mergedHeaders,
       ).timeout(
         const Duration(seconds: 10),
       );

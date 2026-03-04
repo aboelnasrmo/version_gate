@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/update_strings.dart';
 import '../models/version_check_result.dart';
 
 /// A persistent banner widget for the "flexible" update mode.
@@ -7,6 +8,11 @@ import '../models/version_check_result.dart';
 /// Displays at the top or bottom of the screen, showing a message
 /// about the available update with an "Update" button and an optional
 /// dismiss (X) button.
+///
+/// Text defaults are resolved in this order:
+/// 1. Explicit parameter (e.g., `message`)
+/// 2. Localized string from `result.strings`
+/// 3. Hardcoded English fallback
 ///
 /// Usage:
 /// ```dart
@@ -34,6 +40,12 @@ class UpdateBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final s = result.strings ?? const UpdateStrings();
+
+    final effectiveMessage = message ??
+        s.resolve(s.bannerMessage, result.storeVersion, result.localVersion);
+    final effectiveUpdateText = updateButtonText ?? s.updateButtonText;
+    final effectiveDismissText = s.dismissButtonText;
 
     return MaterialBanner(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -42,20 +54,18 @@ class UpdateBanner extends StatelessWidget {
         color: theme.colorScheme.primary,
       ),
       content: Text(
-        message ??
-            'Version ${result.storeVersion} is available. '
-                'Tap Update to get the latest features.',
+        effectiveMessage,
         style: theme.textTheme.bodyMedium,
       ),
       actions: [
         if (showDismiss)
           TextButton(
             onPressed: onDismiss,
-            child: const Text('Dismiss'),
+            child: Text(effectiveDismissText),
           ),
         FilledButton(
           onPressed: () => result.openStore(),
-          child: Text(updateButtonText ?? 'Update'),
+          child: Text(effectiveUpdateText),
         ),
       ],
     );
