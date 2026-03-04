@@ -90,7 +90,7 @@ Two popular packages exist for version checking — `new_version` (broken since 
 
 ```yaml
 dependencies:
-  version_gate: ^1.0.3
+  version_gate: ^1.0.4
 ```
 
 ### 2. Install packages
@@ -104,6 +104,32 @@ flutter pub get
 ```dart
 import 'package:version_gate/version_gate.dart';
 ```
+
+### 4. Platform Setup
+
+The `url_launcher` dependency requires a small platform config so your app can open store URLs.
+
+**Android** — add to `android/app/src/main/AndroidManifest.xml` (inside `<manifest>`, before `<application>`):
+
+```xml
+<queries>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="https" />
+  </intent>
+</queries>
+```
+
+**iOS** — add to `ios/Runner/Info.plist` (inside `<dict>`):
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>https</string>
+</array>
+```
+
+> **Note:** If you skip this step, `openStore()` may silently fail on Android 11+ and iOS.
 
 ---
 
