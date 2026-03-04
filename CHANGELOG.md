@@ -5,10 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.4] - 2026-03-04
+## [1.0.5] - 2026-03-04
 
 ### Added
 - Platform Setup section in README — Android `<queries>` and iOS `LSApplicationQueriesSchemes` config required by `url_launcher` for opening store URLs
+
+### Changed
+- Widened `package_info_plus` dependency to `>=8.0.0 <10.0.0` so consumers on v9 don't need a dependency override
+
+## [1.0.4] - 2026-03-04
+
+### Changed
+- Updated README installation version to latest
 
 ## [1.0.3] - 2026-03-03
 
@@ -68,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `http` — store API calls
 - `url_launcher` — open store listing
 
+[1.0.5]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.5
 [1.0.4]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.4
 [1.0.3]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.3
 [1.0.2]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.2
