@@ -10,7 +10,7 @@
 ///   result.showBuiltInDialog(context);
 /// }
 /// ```
-library version_gate;
+library;
 
 export 'src/core/version_gate.dart';
 export 'src/core/version_comparator.dart';

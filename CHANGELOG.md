@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-06
+
+### Changed
+- Widened `package_info_plus` dependency to `>=8.0.0 <11.0.0` to support v10.x
+- Bumped `shared_preferences` minimum to `^2.5.0`
+- Bumped `url_launcher` minimum to `^6.3.0`
+- Upgraded `flutter_lints` to `^6.0.0`
+- Upgraded `mocktail` to `^1.0.5`
+- Removed unnecessary library name (new lint rule in `flutter_lints` 6)
+- Added `.pubignore` to exclude build artifacts from published package
+
 ## [1.1.0] - 2026-03-04
 
 ### Added
@@ -89,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `http` — store API calls
 - `url_launcher` — open store listing
 
+[1.2.0]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.2.0
 [1.1.0]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.1.0
 [1.0.5]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.5
 [1.0.4]: https://github.com/aboelnasrmo/version_gate/releases/tag/v1.0.4
